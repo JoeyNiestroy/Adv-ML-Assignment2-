@@ -213,7 +213,7 @@ Includes Example using simulated data
 '''
 
 class UsearchNN:
-    def __init__(self, k):
+    def __init__(self, k, metric = MetricKind.L2sq):
         '''
         k: Int (range 1, n)
         
@@ -221,6 +221,7 @@ class UsearchNN:
         self.vectors = None
         self.indices = None
         self.k = k
+        self.metric = metric
 
     def fit(self, X, y):
         """Store the dataset and sets is_fitted"""
@@ -237,7 +238,7 @@ class UsearchNN:
         Returns predictions of shape (batch_size,1)
         '''
         check_is_fitted(self, 'fitted_')
-        output: BatchMatches = search(self.vectors, X, self.k, MetricKind.L2sq, exact=True)
+        output: BatchMatches = search(self.vectors, X, self.k,self.metric, exact=True)
         temp = []
         for set_ in output.keys:
             temp.append([self.targets[set_].mean()])
