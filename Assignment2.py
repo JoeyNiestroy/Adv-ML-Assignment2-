@@ -219,7 +219,7 @@ class UsearchNN:
         
         '''
         self.vectors = None
-        self.indices = None
+        self.targets = None
         self.k = k
         self.metric = metric
 
